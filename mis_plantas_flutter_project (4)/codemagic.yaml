@@ -1,0 +1,22 @@
+workflows:
+  android-apk:
+    name: Compilar APK Android
+    instance_type: mac_mini_m1
+    max_build_duration: 30
+    environment:
+      flutter: stable
+      java: 17
+    scripts:
+      - name: Descargar paquetes de Flutter
+        script: flutter pub get
+      - name: Compilar instalador APK release
+        script: flutter build apk --release
+    artifacts:
+      - build/**/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - santiza0708@gmail.com
+        notify:
+          success: true
+          failure: true
